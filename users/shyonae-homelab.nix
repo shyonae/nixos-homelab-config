@@ -43,8 +43,6 @@ in
         inputs.stylix.homeManagerModules.stylix
       ];
 
-      homePkgsOther.enable = lib.mkDefault false;
-
       home = {
         username = userSettings.username;
         homeDirectory = "/home/${userSettings.username}";
