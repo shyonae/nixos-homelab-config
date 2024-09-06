@@ -28,7 +28,6 @@
       # cd result
       # https://sesh.github.io/base16-viewer/
       base16Scheme = "${pkgs.base16-schemes}/share/themes/${userSettings.base16SchemeName}.yaml";
-      image = ./themes/wallpapers/293854.jpg;
 
       cursor = {
         name = userSettings.cursorName;
