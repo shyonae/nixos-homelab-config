@@ -4,7 +4,7 @@ let
     hostname = "homelabmainhpsff";
     bootMode = "uefi";
     bootMountPath = "/boot";
-    grubDevice = "";
+    grubDevice = "/dev/sda";
   };
 in
 {

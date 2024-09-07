@@ -4,7 +4,7 @@ let
     hostname = "homelabrd450";
     bootMode = "uefi";
     bootMountPath = "/boot";
-    grubDevice = "";
+    grubDevice = "/dev/sda";
   };
 in
 {

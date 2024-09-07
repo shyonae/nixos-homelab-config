@@ -3,7 +3,7 @@ let
   specificSystemSettings = {
     hostname = "homelabthinkpadt440p1";
     bootMode = "grub";
-    bootMountPath = "";
+    bootMountPath = "/boot";
     grubDevice = "/dev/sda";
   };
 in
