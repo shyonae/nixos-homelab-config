@@ -6,6 +6,11 @@ if [[ -z "$1" ]]; then
     exit 1
 fi
 
+if [ "$EUID" -ne 0 ]; then
+    echo "Please run this script as root or using sudo."
+    exit 1
+fi
+
 if [[ -z $(command -v git) ]]; then
     echo "Git is not installed."
     exit 0
@@ -34,25 +39,25 @@ else
 fi
 
 echo "Generating hardware config..."
-sudo nixos-generate-config --show-hardware-config > /etc/nixos/hardware-configuration.nix
+nixos-generate-config --show-hardware-config >/etc/nixos/hardware-configuration.nix
 
 is_nixos_present=$(nix-channel --list | grep -c "nixos")
 
 if [[ "$is_nixos_present" -eq 0 ]]; then
     echo "NixOS unstable channel not found. Adding..."
-    sudo nix-channel --add https://nixos.org/channels/nixos-unstable nixos
+    nix-channel --add https://nixos.org/channels/nixos-unstable nixos
 elif [[ "$file_name" == *"homelab"* && "$is_nixos_present" -eq 0 ]]; then
     echo "Homelab detected. NixOS stable channel not found. Adding..."
-    sudo nix-channel --add https://nixos.org/channels/nixos-24.05 nixos
+    nix-channel --add https://nixos.org/channels/nixos-24.05 nixos
 else
     echo "NixOS channel is already configured."
 fi
 
 echo "Updating channels..."
-sudo nix-channel --update
+nix-channel --update
 
-sudo cp "${parent_dir}/flake.nix" /etc/nixos/
+cp "${parent_dir}/flake.nix" /etc/nixos/
 sed -i "s|MAIN_DIRECTORY|${script_path}|g" /etc/nixos/flake.nix
 
 echo "Initializing system..."
-sudo nixos-rebuild switch --flake /etc/nixos --impure
+nixos-rebuild switch --flake /etc/nixos --impure

@@ -10,7 +10,7 @@ in
 {
   imports =
     [
-      (import ./homelab_default.nix { inherit specificSystemSettings; })
+      (import ./homelab_default.nix { inherit config lib pkgs pkgs-unstable modulesPath specificSystemSettings; })
     ];
 
   networking.hostName = specificSystemSettings.hostname;
