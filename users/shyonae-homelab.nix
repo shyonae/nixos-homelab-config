@@ -33,7 +33,7 @@ in
       inherit pkgs pkgs-stable userSettings;
     };
 
-    backupFileExtension = "backup";
+    backupFileExtension = "backupp";
 
     users.${userSettings.username} = { pkgs, ... }: {
 
